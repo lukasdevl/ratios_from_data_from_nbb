@@ -2,10 +2,10 @@ import requests
 import pandas as pd
 from dataclasses import dataclass
 
-API_KEY = str(input("JOUW_ECHTE_API_KEY_HIER")) # ik heb hier nog input gezet omda je da altijd moet ingeven denk ik
-BASE_URL = "https://api.cbso.nbb.be/CBSO/..." #de url blijft hetzelfde dus geen input hier
+API_KEY = "JOUW_ECHTE_API_KEY_HIER"
+BASE_URL = "https://ws.uat2.cbso.nbb.be/authentic/legalEntity/0403101811/references"
 
-def get_annual_accounts(enterprise_number: str, year: int):        # ik weet nie of da buiten of binnen de class moet
+def get_annual_accounts(enterprise_number: str, year: int):
     headers = {
         "Ocp-Apim-Subscription-Key": API_KEY,
         "Accept": "application/json"
@@ -18,7 +18,6 @@ def get_annual_accounts(enterprise_number: str, year: int):        # ik weet nie
     response = requests.get(BASE_URL, headers=headers, params=params)
     response.raise_for_status()
     return response.json()
-
 
 @dataclass
 class AnnualAccountData:
